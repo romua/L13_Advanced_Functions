@@ -1,9 +1,23 @@
-function fibonacci(index) {
-    let fibo = [0, 1];
-    for (let i = 2; i <= index; i++) {
-        fibo[i]=fibo[i-1]+fibo[i-2];
+var fibonacci = (function() {
+    var cache = {};
+    function f(n) {
+        var value;
+        if (n in cache) {
+            value = cache[n];
+        } else {
+            if (n === 0 || n === 1) {
+                value = n;
+            }
+            else {
+                value = f(n - 1) + f(n - 2);
+            }
+            cache[n] = value;
+        }
+        return value;
     }
-    return fibo[index];
-}
+    return f;
+})();
 
-console.log(fibonacci(0));
+
+
+module.exports = fibonacci;
